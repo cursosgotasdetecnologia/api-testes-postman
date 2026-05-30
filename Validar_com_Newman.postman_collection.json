@@ -1,0 +1,397 @@
+{
+  "info": {
+    "_postman_id": "09756f73-6a84-4fba-95e4-490bdd00b3aa",
+    "name": "Validar com Newman",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "15307284"
+  },
+  "item": [
+    {
+      "name": "Validar Cadastro de Produtos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Teste 1",
+              "pm.test(\"Produto é criado com sucesso\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "// Teste 2",
+              "pm.test(\"Produto apresenta informações principais estruturadas corretamente\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"data\");",
+              "    pm.expect(jsonData.data).to.be.an(\"object\");",
+              "});",
+              "",
+              "// Teste 3",
+              "pm.test(\"Produto apresenta lista de mensagens estruturada corretamente\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"mensagens\");",
+              "    pm.expect(jsonData.mensagens).to.be.an(\"array\");",
+              "});",
+              "",
+              "// Teste 4",
+              "pm.test(\"Produto retorna todas as informações esperadas\", function () {",
+              "    const data = pm.response.json().data;",
+              "    const camposEsperados = [",
+              "        \"id\", \"category_id\", \"supplier_id\", \"name\", \"slug\", \"description\",",
+              "        \"short_description\", \"price\", \"cost_price\", \"stock_quantity\",",
+              "        \"reorder_level\", \"image_url\", \"sku\", \"barcode\", \"weight\",",
+              "        \"is_active\", \"is_featured\", \"discount_percentage\", \"rating\",",
+              "        \"reviews_count\", \"views_count\", \"sales_count\", \"created_at\", \"updated_at\"",
+              "    ];",
+              "    camposEsperados.forEach(campo => {",
+              "        pm.expect(data).to.have.property(campo);",
+              "    });",
+              "});",
+              "",
+              "// Teste 5",
+              "pm.test(\"Produto apresenta informações com formatos válidos\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data.id).to.be.a(\"number\");",
+              "    pm.expect(data.category_id).to.be.a(\"number\");",
+              "    pm.expect(data.supplier_id).to.be.a(\"number\");",
+              "    pm.expect(data.name).to.be.a(\"string\");",
+              "    pm.expect(data.slug).to.be.a(\"string\");",
+              "    pm.expect(data.price).to.be.a(\"number\");",
+              "    pm.expect(data.stock_quantity).to.be.a(\"number\");",
+              "    pm.expect(data.sku).to.be.a(\"string\");",
+              "    pm.expect(data.is_active).to.be.a(\"boolean\");",
+              "    pm.expect(data.is_featured).to.be.a(\"boolean\");",
+              "    pm.expect(data.discount_percentage).to.be.a(\"number\");",
+              "    pm.expect(data.rating).to.be.a(\"number\");",
+              "    pm.expect(data.reviews_count).to.be.a(\"number\");",
+              "    pm.expect(data.views_count).to.be.a(\"number\");",
+              "    pm.expect(data.sales_count).to.be.a(\"number\");",
+              "    pm.expect(data.created_at).to.be.a(\"string\");",
+              "    pm.expect(data.updated_at).to.be.a(\"string\");",
+              "});",
+              "",
+              "// Teste 6",
+              "pm.test(\"Produto possui nome igual ao informado\", function () {",
+              "    const requestBody = JSON.parse(pm.request.body.raw);",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.name).to.equal(requestBody.name);",
+              "});",
+              "",
+              "// Teste 7",
+              "pm.test(\"Produto possui código identificador igual ao informado\", function () {",
+              "    const requestBody = JSON.parse(pm.request.body.raw);",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.sku).to.equal(requestBody.sku);",
+              "});",
+              "",
+              "// Teste 8",
+              "pm.test(\"Produto possui preço igual ao informado\", function () {",
+              "    const requestBody = JSON.parse(pm.request.body.raw);",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.price).to.equal(requestBody.price);",
+              "});",
+              "",
+              "// Teste 9",
+              "pm.test(\"Produto possui quantidade em estoque igual à informada\", function () {",
+              "    const requestBody = JSON.parse(pm.request.body.raw);",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.stock_quantity).to.equal(requestBody.stock_quantity);",
+              "});",
+              "",
+              "// Teste 10",
+              "pm.test(\"Produto é associado à categoria informada\", function () {",
+              "    const requestBody = JSON.parse(pm.request.body.raw);",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.category_id).to.equal(requestBody.category_id);",
+              "});",
+              "",
+              "// Teste 11",
+              "pm.test(\"Produto é associado ao fornecedor informado\", function () {",
+              "    const requestBody = JSON.parse(pm.request.body.raw);",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.supplier_id).to.equal(requestBody.supplier_id);",
+              "});",
+              "",
+              "// Teste 12",
+              "pm.test(\"Produto está ativo\", function () {",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.is_active).to.be.true;",
+              "});",
+              "",
+              "// Teste 13",
+              "pm.test(\"Produto retorna ao menos uma mensagem informativa\", function () {",
+              "    const mensagens = pm.response.json().mensagens;",
+              "    pm.expect(mensagens.length).to.be.greaterThan(0);",
+              "    mensagens.forEach(msg => {",
+              "        pm.expect(msg).to.be.a(\"string\");",
+              "    });",
+              "});",
+              "",
+              "// Teste 14",
+              "pm.test(\"Produto possui identificador válido\", function () {",
+              "    const responseData = pm.response.json().data;",
+              "    pm.expect(responseData.id).to.be.a(\"number\");",
+              "    pm.expect(responseData.id).to.be.greaterThan(0);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"{{$randomLastName}}\",\n    \"price\": 50,\n    \"stock_quantity\": 10,\n    \"sku\": \"SKU-{{$randomInt}}-{{$randomAlphaNumeric}}\",\n    \"category_id\": 10,\n    \"supplier_id\": 10\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/products",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validar Cadastro de Fornecedores",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Fornecedor é criado com sucesso\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Fornecedor é processado em tempo adequado\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cnpj = Date.now().toString().padStart(14, '0').slice(-14);\r",
+              "pm.variables.set(\"cnpj_unico\", cnpj);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"company_name\": \"{{$randomCompanyName}}\",\n  \"contact_name\": \"{{$randomFullName}}\",\n  \"email\": \"{{$randomEmail}}\",\n  \"phone\": \"(11) 98765-4321\",\n   \"cnpj\": \"{{cnpj_unico}}\",\n  \"uf\": \"SP\"\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/suppliers",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "suppliers"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validar cadastro de categoria",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1",
+              "pm.test(\"Categoria é criada com sucesso\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "// 2",
+              "pm.test(\"Categoria apresenta informações principais estruturadas corretamente\", function () {",
+              "    pm.expect(pm.response.json()).to.have.property(\"data\");",
+              "    pm.expect(pm.response.json().data).to.be.an(\"object\");",
+              "});",
+              "",
+              "// 3",
+              "pm.test(\"Categoria apresenta lista de mensagens estruturada corretamente\", function () {",
+              "    pm.expect(pm.response.json()).to.have.property(\"mensagens\");",
+              "    pm.expect(pm.response.json().mensagens).to.be.an(\"array\");",
+              "});",
+              "",
+              "// 4",
+              "pm.test(\"Categoria possui nome preenchido\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data).to.have.property(\"name\");",
+              "    pm.expect(data.name).to.not.be.empty;",
+              "});",
+              "",
+              "// 5",
+              "pm.test(\"Categoria possui descrição preenchida\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data).to.have.property(\"description\");",
+              "    pm.expect(data.description).to.not.be.empty;",
+              "});",
+              "",
+              "// 6",
+              "pm.test(\"Categoria está ativa\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data).to.have.property(\"is_active\");",
+              "    pm.expect(data.is_active).to.be.true;",
+              "});",
+              "",
+              "// 7",
+              "pm.test(\"Categoria possui identificador válido\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data).to.have.property(\"id\");",
+              "    pm.expect(data.id).to.be.a(\"number\");",
+              "    pm.expect(data.id).to.be.greaterThan(0);",
+              "});",
+              "",
+              "// 8",
+              "pm.test(\"Categoria possui identificador amigável preenchido\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data).to.have.property(\"slug\");",
+              "    pm.expect(data.slug).to.not.be.empty;",
+              "});",
+              "",
+              "// 9",
+              "pm.test(\"Categoria retorna mensagem de sucesso na criação\", function () {",
+              "    const mensagens = pm.response.json().mensagens;",
+              "    pm.expect(mensagens.length).to.be.greaterThan(0);",
+              "    pm.expect(mensagens[0]).to.include(\"Categoria criada com sucesso!\");",
+              "});",
+              "",
+              "// 10",
+              "pm.test(\"Categoria retorna mensagem complementar informativa\", function () {",
+              "    const mensagens = pm.response.json().mensagens;",
+              "    pm.expect(mensagens.length).to.be.greaterThan(1);",
+              "    pm.expect(mensagens[1]).to.include(\"Supabase\");",
+              "});",
+              "",
+              "// 12",
+              "pm.test(\"Categoria possui ordem de exibição igual a zero\", function () {",
+              "    const data = pm.response.json().data;",
+              "    pm.expect(data).to.have.property(\"display_order\");",
+              "    pm.expect(data.display_order).to.equal(0);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"{{$randomJobArea}}-{{$randomInt}}\",\n  \"description\": \"{{$randomLoremSentence}}\"\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/categories",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
