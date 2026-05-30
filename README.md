@@ -64,7 +64,7 @@ Publicação do projeto no GitHub com estrutura organizada e README profissional
 ## 📸 Evidências
 
 ### ✅ Collection Runner — Resultado dos Testes
-![Runner](docs/images/runner-resultado.png)
+![Runner](docs/images/testes-runner.png)
 
 ### 📊 Relatório HTML — Newman htmlextra
 ![Relatório HTML](docs/images/relatorio-html.png)
