@@ -67,7 +67,7 @@ Publicação do projeto no GitHub com estrutura organizada e README profissional
 ![Runner](docs/images/testes-runner.png)
 
 ### 📊 Relatório HTML — Newman htmlextra
-![Relatório HTML](docs/images/relatorio-html.png)
+![Relatório HTML](docs/assets/testes-runner.png)
 
 ### 🧪 Testes Automatizados no Postman
 ![Postman Testes](docs/images/postman-testes.png)
