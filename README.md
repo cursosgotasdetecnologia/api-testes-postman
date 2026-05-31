@@ -64,16 +64,22 @@ Publicação do projeto no GitHub com estrutura organizada e README profissional
 ## 📸 Evidências
 
 ### ✅ Collection Runner — Resultado dos Testes
-![Runner](docs/images/testes-runner.png)
+![Runner](docs/assets/testes-runner.PNG)
 
 ### 📊 Relatório HTML — Newman htmlextra
-![Relatório HTML](docs/assets/testes-runner.PNG)
+![Relatório HTML](docs/assets/relatorio.PNG)
+
+### 🧪 Testes Automatizados com Runner
+![Postman Testes](docs/assets/postman-automation.PNG)
 
 ### 🧪 Testes Automatizados no Postman
-![Postman Testes](docs/images/postman-testes.png)
+![Postman Testes](docs/assets/tests-postman-results.PNG)
 
 ### 📂 Data Driven — Massa de Dados
-![Data Driven](docs/images/data-driven.png)
+![Data Driven](docs/assets/data-driven-json.png)
+
+### 📂 SWAGGER UI
+![Swagger](docs/assets/swagger.PNG)
 
 ---
 
