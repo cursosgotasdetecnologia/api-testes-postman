@@ -76,7 +76,7 @@ Publicação do projeto no GitHub com estrutura organizada e README profissional
 ![Postman Testes](docs/assets/tests-postman-results.PNG)
 
 ### 📂 Data Driven — Massa de Dados
-![Data Driven](docs/assets/data-driven-json.png)
+![Data Driven](docs/assets/data-driven-json.PNG)
 
 ### 📂 SWAGGER UI
 ![Swagger](docs/assets/swagger.PNG)
